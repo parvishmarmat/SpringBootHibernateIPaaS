@@ -1,34 +1,28 @@
 package com.IPaaS.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "EMP_ID")
+    @GeneratedValue
     private int id;
  
     @Column(name = "NAME")
     private String name;
  
     @Column(name = "JOINING_DATE")
-    private LocalDate joiningDate;
+    private Date joiningDate;
  
     @Column(name = "SALARY")
     private BigDecimal salary;
@@ -49,12 +43,12 @@ public class Employee {
 		this.name = name;
 	}
 
-	public LocalDate getJoiningDate() {
+	public Date getJoiningDate() {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(LocalDate joiningDate) {
-		this.joiningDate = joiningDate;
+	public void setJoiningDate(Date date) {
+		this.joiningDate = date;
 	}
 
 	public BigDecimal getSalary() {

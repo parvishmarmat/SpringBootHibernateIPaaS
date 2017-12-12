@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: CloudIPaaSService
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: PM00474968
+Implementation-Vendor-Id: com.cloud.ipaas
+Build-Jdk: 1.8.0_25
+Implementation-URL: http://projects.spring.io/spring-boot/CloudIPaaSSe
+ rvice/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

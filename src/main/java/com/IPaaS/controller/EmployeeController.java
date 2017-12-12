@@ -1,18 +1,20 @@
 package com.IPaaS.controller;
 
+import java.util.Date;
 import java.util.List;
-import java.time.LocalDate;
-
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.IPaaS.dao.EmployeeDAO;
 import com.IPaaS.model.Employee;
+
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -23,9 +25,9 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/getEmployee", method = RequestMethod.GET)
     @ResponseBody
-    public Employee getEmployee(){
+    public Employee getEmployee(@PathVariable int id){
     	
-    	Employee emp = employeeDao.findById(1);
+    	Employee emp = employeeDao.findById(id);
     	System.out.println(emp.getName());
     	
     	return emp;
@@ -33,14 +35,16 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.GET)
     @ResponseBody
-    public String saveEmployee(){
-		Employee employee = new Employee();
-		employee.setId(1);
-		employee.setName("Dev");
+    public String saveEmployee(@RequestBody Employee employee){
+//		Employee employee = new Employee();
+//		employee.setName("Ram");
+//		employee.setSalary(new BigDecimal(30000));
+//		employee.setJoiningDate(new Date());
+		
 		String result = employeeDao.saveEmployee(employee);
     	System.out.println("Saving Result****"+result);
     	
-    	return "";
+    	return result;
     }
 	
 	
@@ -53,41 +57,5 @@ public class EmployeeController {
 			return null;
 		}
 	}
-	
-	/*@RequestMapping(value = "/delete")
-	@ResponseBody
-	public String delete(long id) {
-		try {
-			Employee person = new Employee();
-			person.setId(id);
-			personDao.delete(person);
-		} catch (Exception ex) {
-			return ex.getMessage();
-		}
-		return "Person succesfully deleted!";
-	}
 
-	@RequestMapping(value = "/save")
-	@ResponseBody
-	public String create(String name, String city) {
-		try {
-			Employee person = new Employee();
-			person.setName(name);
-			person.setCity(city);
-			personDao.savePerson(person);
-		} catch (Exception ex) {
-			return ex.getMessage();
-		}
-		return "Person succesfully saved!";
-	}
-
-	@RequestMapping(value = "/allPersons")
-	@ResponseBody
-	public List<Employee> getAllPersons() {
-		try {
-			return personDao.getAllPersons();
-		} catch (Exception ex) {
-			return null;
-		}
-	}*/
 }
