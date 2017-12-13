@@ -5,6 +5,8 @@ import java.util.List;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeDAO employeeDao;
 
-	@RequestMapping(value = "/getEmployee", method = RequestMethod.GET)
+	@RequestMapping(value = "/getEmployee/{empId}", method = RequestMethod.GET)
     @ResponseBody
     public Employee getEmployee(@PathVariable int id){
     	
@@ -33,9 +35,9 @@ public class EmployeeController {
     	return emp;
     }
 	
-	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public String saveEmployee(@RequestBody Employee employee){
+    public ResponseEntity<?> saveEmployee(@RequestBody Employee employee){
 //		Employee employee = new Employee();
 //		employee.setName("Ram");
 //		employee.setSalary(new BigDecimal(30000));
@@ -44,7 +46,12 @@ public class EmployeeController {
 		String result = employeeDao.saveEmployee(employee);
     	System.out.println("Saving Result****"+result);
     	
-    	return result;
+    	if (result.equals("Success")) {
+    		return new ResponseEntity<Employee>(employee, HttpStatus.ACCEPTED);
+		}else {
+			return null;
+		}
+    	
     }
 	
 	
